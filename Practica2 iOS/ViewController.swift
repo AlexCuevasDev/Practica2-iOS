@@ -12,9 +12,6 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     
 
     @IBOutlet weak var pickerView: UIPickerView!
-    pickerView.dataSource = self
-    pickerView.delegate = self
-    
     var monedas = ["Euro","Dollar","Yen","Tomate"]
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -30,12 +27,10 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     }
     
     override func viewDidLoad() {
+        pickerView.dataSource = self
+        pickerView.delegate = self
         super.viewDidLoad()
     }
-    //TODO this
-
-    
-
 
 }
 
