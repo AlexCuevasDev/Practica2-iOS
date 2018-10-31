@@ -9,27 +9,38 @@
 import UIKit
 
 class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
-    
+    // TODO DICCIONARIOS CLASES ARRAYS
 
     @IBOutlet weak var pickerView: UIPickerView!
-    var monedas = ["Euro","Dollar","Yen","Tomate"]
-    
+    var coinArray = ["Euro","Dollar","Pounds", "Yen","Tomate"]
+    var coinDictionary = [String: Int]()
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return monedas.count
+        return coinArray.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return monedas[row]
+        return coinArray[row]
     }
     
     override func viewDidLoad() {
         pickerView.dataSource = self
         pickerView.delegate = self
         super.viewDidLoad()
+        
+    }
+    
+    func initDictionary(){
+        for i in coinArray{
+            coinDictionary
+        }
+    }
+    
+    func initCoins(){
+        Currency(name: coinArray[0].uppercased(),value: 1,symbol: "s")
     }
 
 }
