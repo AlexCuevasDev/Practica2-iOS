@@ -10,10 +10,10 @@ import Foundation
 
 class Currency {
     var name : String
-    var value : Int = 0
+    var value : Double
     var symbol : Character
     
-    init (name : String, value : Int, symbol : Character){
+    init (name : String, value : Double, symbol : Character){
         self.name = name
         self.value = value
         self.symbol = symbol

@@ -15,6 +15,7 @@
 		7F440C652180ECA300DB5673 /* Practica2_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F440C642180ECA300DB5673 /* Practica2_iOSTests.swift */; };
 		7F440C702180ECA300DB5673 /* Practica2_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F440C6F2180ECA300DB5673 /* Practica2_iOSUITests.swift */; };
 		7F6B8D39218A339B0055796E /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6B8D38218A339B0055796E /* Currency.swift */; };
+		7F7284BA21936F4500DA9846 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7284B921936F4500DA9846 /* View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		7F440C6F2180ECA300DB5673 /* Practica2_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Practica2_iOSUITests.swift; sourceTree = "<group>"; };
 		7F440C712180ECA300DB5673 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F6B8D38218A339B0055796E /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		7F7284B921936F4500DA9846 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				7F440C582180ECA300DB5673 /* LaunchScreen.storyboard */,
 				7F440C5B2180ECA300DB5673 /* Info.plist */,
 				7F6B8D38218A339B0055796E /* Currency.swift */,
+				7F7284B921936F4500DA9846 /* View.swift */,
 			);
 			path = "Practica2 iOS";
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F7284BA21936F4500DA9846 /* View.swift in Sources */,
 				7F6B8D39218A339B0055796E /* Currency.swift in Sources */,
 				7F440C522180ECA100DB5673 /* ViewController.swift in Sources */,
 				7F440C502180ECA100DB5673 /* AppDelegate.swift in Sources */,
