@@ -8,7 +8,9 @@
 
 import Foundation
 
-class Currency {
+class Currency: CustomStringConvertible{
+    public var description: String { return "\(name) \(symbol)" }
+    
     var name : String
     var value : Double
     var symbol : Character
