@@ -8,13 +8,30 @@
 
 import UIKit
 
-class Hack: UIViewController {
+class Hack: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
 
+    @IBOutlet weak var pickerView: UIPickerView!
+    
     override func viewDidLoad() {
+        pickerView.dataSource = self
+        pickerView.delegate = self
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return coinDictionary.count
+    }
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+       return coinArray[row]
+    }
 
 }

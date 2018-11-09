@@ -8,10 +8,15 @@
 
 import UIKit
 
+var coinDictionary = [String: Currency]()
+var coinArray = ["Euro","Dollar","Pound", "Yen","BitCoin"] //Le paso el array de Strings también porque en la otra view no deja coger los strings del diccionario con coinDictionary.keys
+
 class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
     // TODO DICCIONARIOS CLASES ARRAYS
 
 
+
+    @IBOutlet weak var btnHack: UIButton!
     @IBOutlet weak var lbValue: UILabel!
     @IBOutlet weak var lbCoin: UILabel!
     @IBOutlet weak var imageBackground: UIImageView!
@@ -21,11 +26,9 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     @IBOutlet weak var btnConvert: UIButton!
     @IBOutlet weak var insertText: UITextField!
     @IBOutlet weak var pickerView: UIPickerView!
-    
+    var viewDidLoadCounter : Int = 0
+
     var viewArray : [View] = []
-    var coinArray = ["Euro","Dollar","Pound", "Yen","WoWToken"]
-    //Así con el WoW Token puedes mirar cuanto gastaste en tu vida universitaria ^^
-    var coinDictionary = [String: Currency]()
     var position : Int = 0
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -44,15 +47,18 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     }
     
     override func viewDidLoad() {
+        position = 0
         pickerView.dataSource = self
         pickerView.delegate = self
         super.viewDidLoad()
-
-        initCoins()
-        initViews()
+        btnHack.isHidden = true
+        if(viewDidLoadCounter == 0){
+            initCoins()
+            initViews()
+        }
         changeView(view: viewArray[0])
 
-        
+        viewDidLoadCounter += 1
     }
     //Initialization of the coins into the dictionary
     func initCoins(){
@@ -68,7 +74,7 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         viewArray.append(View(flag: UIImage(named: "usaFlag")!, back: UIImage(named: "cars")!, coin: coinDictionary["Dollar"]!))
         viewArray.append(View(flag: UIImage(named: "ukFlag")!, back: UIImage(named: "metro")!, coin: coinDictionary["Pound"]!))
         viewArray.append(View(flag: UIImage(named: "japanFlag")!, back: UIImage(named: "citySkyBlack")!, coin: coinDictionary["Yen"]!))
-        viewArray.append(View(flag: UIImage(named: "wowLogo")!, back: UIImage(named: "road")!, coin: coinDictionary["WoWToken"]!))
+       viewArray.append(View(flag: UIImage(named: "bitCoin")!, back: UIImage(named: "road")!, coin: coinDictionary["BitCoin"]!))
     }
     
     //Calculating the value of the coin using the ratios in the Currency class, then rounding it
@@ -91,10 +97,11 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     @IBAction func convertClick(_ sender: Any) {
         if(insertText.text != ""){
             if(insertText.text == "999"){
-                
-            }
+                btnHack.isHidden = false
+            }else{
         initConvertionLabels()
         calc()
+            }
         }
     }
     
