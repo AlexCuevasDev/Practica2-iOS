@@ -26,7 +26,7 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     var coinArray = ["Euro","Dollar","Pounds", "Yen","WoWToken"]
     //Así con el WoW Token puedes mirar cuanto gastaste en tu vida universitaria ^^
     var coinDictionary = [String: Currency]()
-    var position : Int
+    var position : Int = 0
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
@@ -97,11 +97,12 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         
     }
     @IBAction func btnBefore(_ sender: Any) {
+        
     }
     
-  /*  @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){
        let tappedImage = tapGestureRecognizer.view as! UIImageView
         
-    } */
+    } 
 }
 
