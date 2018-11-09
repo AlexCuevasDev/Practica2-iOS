@@ -23,7 +23,7 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     @IBOutlet weak var pickerView: UIPickerView!
     
     var viewArray : [View] = []
-    var coinArray = ["Euro","Dollar","Pounds", "Yen","WoWToken"]
+    var coinArray = ["Euro","Dollar","Pound", "Yen","WoWToken"]
     //Así con el WoW Token puedes mirar cuanto gastaste en tu vida universitaria ^^
     var coinDictionary = [String: Currency]()
     var position : Int = 0
@@ -46,7 +46,7 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         super.viewDidLoad()
         initCoins()
         initViews()
-        imageBackground.image = viewArray[0].backGroundImage
+        changeView(view: viewArray[0])
   /*      let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         imageHack.isUserInteractionEnabled = true */
     }
@@ -93,16 +93,36 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         calc()
         }
     }
+    
+    func changeView(view : View){
+        imageBackground.image = view.backGroundImage
+        imageFlag.image = view.flagImage
+        lbValue.text = String(view.coin.value)
+    }
+    
     @IBAction func btnNext(_ sender: Any) {
+        if (position < viewArray.count-1){
+            position += 1
+            changeView(view: viewArray[position])
+        }else {
+            position = 0
+            changeView(view: viewArray[position])
+        }
         
     }
     @IBAction func btnBefore(_ sender: Any) {
-        
+        if (position > 0){
+            position -= 1
+            changeView(view: viewArray[position])
+        }else {
+            position = viewArray.count-1
+            changeView(view: viewArray[position])
+        }
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){
        let tappedImage = tapGestureRecognizer.view as! UIImageView
         
-    } 
+    }
 }
 
