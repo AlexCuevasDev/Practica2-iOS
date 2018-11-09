@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
     // TODO DICCIONARIOS CLASES ARRAYS
 
-    @IBOutlet weak var imageHack: UIImageView!
+
     @IBOutlet weak var lbValue: UILabel!
     @IBOutlet weak var lbCoin: UILabel!
     @IBOutlet weak var imageBackground: UIImageView!
@@ -39,16 +39,20 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return coinArray[row]
     }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        //para que detecte cuando se mueve el pickerview
+    }
     
     override func viewDidLoad() {
         pickerView.dataSource = self
         pickerView.delegate = self
         super.viewDidLoad()
+
         initCoins()
         initViews()
         changeView(view: viewArray[0])
-  /*      let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        imageHack.isUserInteractionEnabled = true */
+
+        
     }
     //Initialization of the coins into the dictionary
     func initCoins(){
@@ -108,7 +112,6 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
             position = 0
             changeView(view: viewArray[position])
         }
-        
     }
     @IBAction func btnBefore(_ sender: Any) {
         if (position > 0){
@@ -119,10 +122,6 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
             changeView(view: viewArray[position])
         }
     }
-    
-    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){
-       let tappedImage = tapGestureRecognizer.view as! UIImageView
-        
-    }
+
 }
 
