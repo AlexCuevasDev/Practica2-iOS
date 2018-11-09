@@ -19,8 +19,9 @@ class Hack: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if(insertText.text != "")
-            hacking()
+        insertText.text = String(coinDictionary[pcikerView.selectedRow()].value)
+      /*  if(insertText.text != "")
+            hacking() this goes into btnHack */ 
             
     }
     
