@@ -90,9 +90,9 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         }
     }
     
+    //Fills the label with text
     func initConvertionLabels(){
-        
-        lbConversion.text = "Conversion from \(coinArray[pickerView.selectedRow(inComponent: 0)]) to \(coinArray[pickerView.selectedRow(inComponent: 1)])"
+        lbConversion.text = "Conversion from \(String(coinDictionary[coinArray[pickerView.selectedRow(inComponent: 0)]])) to \(String(coinDictionary[coinArray[pickerView.selectedRow(inComponent: 1)]]))"
     }
     //When the button to exchange the coins is clicked, checks if the user has inputted the hack code
     @IBAction func convertClick(_ sender: Any) {
