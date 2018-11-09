@@ -9,7 +9,8 @@
 import UIKit
 //global vars so the hack.viewcontroller can see them
 var coinDictionary = [String: Currency]()
-var coinArray = ["Euro","Dollar","Pound", "Yen","BitCoin"] 
+var coinArray = ["Euro","Dollar","Pound", "Yen","BitCoin"]
+var viewDidLoadCounter : Int = 0
 
 class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
 
@@ -23,7 +24,7 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     @IBOutlet weak var btnConvert: UIButton!
     @IBOutlet weak var insertText: UITextField!
     @IBOutlet weak var pickerView: UIPickerView!
-    var viewDidLoadCounter : Int = 0
+    
 
     var viewArray : [View] = []
     var position : Int = 0
@@ -49,17 +50,19 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         btnHack.isHidden = true
         pickerView.dataSource = self
         pickerView.delegate = self
-        super.viewDidLoad()    
-        if(viewDidLoadCounter == 0){
-            initCoins()
-            initViews()
+        super.viewDidLoad()
+        if(coinDictionary.count == 0){
+        initCoins()
+        }
+        if(viewArray.count == 0){
+        initViews()
         }
         changeView(view: viewArray[0])
-        viewDidLoadCounter += 1
+
     }
     //Initialization of the coins into the dictionary
     func initCoins(){
-        coinDictionary[coinArray[0]] = Currency(name: coinArray[0].uppercased(),value: 1,symbol: "€")
+        coinDictionary[coinArray[0]] = Currency(name: coinArray[0].uppercased(),value: 1, symbol: "€")
         coinDictionary[coinArray[1]] = Currency(name: coinArray[1].uppercased(), value: 0.87, symbol: "$")
         coinDictionary[coinArray[2]] = Currency(name: coinArray[2].uppercased(), value: 1.14, symbol: "£")
         coinDictionary[coinArray[3]] = Currency(name: coinArray[3].uppercased(), value: 0.0077, symbol: "¥")
@@ -67,7 +70,7 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     }
     //Initialization of the views into the array
     func initViews(){
-        viewArray.append(View(flag: UIImage(named: "europeFlag")!, back: UIImage(named: "bridge")!, coin: coinDictionary["Euro"]!))
+        viewArray.append(View(flag: UIImage(named: "europeFlag")!, back: UIImage(named: "paris")!, coin: coinDictionary["Euro"]!))
         viewArray.append(View(flag: UIImage(named: "usaFlag")!, back: UIImage(named: "cars")!, coin: coinDictionary["Dollar"]!))
         viewArray.append(View(flag: UIImage(named: "ukFlag")!, back: UIImage(named: "metro")!, coin: coinDictionary["Pound"]!))
         viewArray.append(View(flag: UIImage(named: "japanFlag")!, back: UIImage(named: "citySkyBlack")!, coin: coinDictionary["Yen"]!))
@@ -76,7 +79,7 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     
     //Checks if the Insert Texts is not empty then calculates the value of the coin using the ratios in the Currency class, afterwards rounding it
     func calc(){
-        if(insertText != ""){
+        if(insertText.text != ""){
         initConvertionLabels() //Writes the labels
             
         let coin1 : Currency = coinDictionary[coinArray[pickerView.selectedRow(inComponent: 0)]]!
@@ -92,7 +95,7 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     
     //Fills the label with text
     func initConvertionLabels(){
-        lbConversion.text = "Conversion from \(String(coinDictionary[coinArray[pickerView.selectedRow(inComponent: 0)]])) to \(String(coinDictionary[coinArray[pickerView.selectedRow(inComponent: 1)]]))"
+        lbConversion.text = "Conversion from \(coinArray[pickerView.selectedRow(inComponent: 0)]) to \(coinArray[pickerView.selectedRow(inComponent: 1)]))"
     }
     //When the button to exchange the coins is clicked, checks if the user has inputted the hack code
     @IBAction func convertClick(_ sender: Any) {

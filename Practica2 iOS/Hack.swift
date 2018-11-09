@@ -10,19 +10,19 @@ import UIKit
 
 class Hack: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
 
+    @IBOutlet weak var insertText: UITextField!
     @IBOutlet weak var pickerView: UIPickerView!
+    
     
     override func viewDidLoad() {
         pickerView.dataSource = self
         pickerView.delegate = self
         super.viewDidLoad()
+        putValueIntoInsertText()
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        insertText.text = String(coinDictionary[pcikerView.selectedRow()].value)
-      /*  if(insertText.text != "")
-            hacking() this goes into btnHack */ 
-            
+        putValueIntoInsertText()
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -37,8 +37,18 @@ class Hack: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
        return coinArray[row]
     }
     
-    func hacking(){
-        coinDictionary[pickerView.selectedRow()].value = insertText.text
+    func putValueIntoInsertText(){
+        insertText.text = String(coinDictionary[coinArray[pickerView.selectedRow(inComponent: 0)]]!.value)
     }
-
+    
+    func hackingCoinRatio(){
+        if(insertText.text != ""){
+            coinDictionary[coinArray[pickerView.selectedRow(inComponent: 0)]]!.value = Double(insertText.text!)!
+        }
+    }
+    
+    @IBAction func btnChange(_ sender: Any) {
+        hackingCoinRatio()
+    }
+    
 }
