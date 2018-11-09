@@ -63,7 +63,7 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         coinDictionary[coinArray[1]] = Currency(name: coinArray[1].uppercased(), value: 0.87, symbol: "$")
         coinDictionary[coinArray[2]] = Currency(name: coinArray[2].uppercased(), value: 1.14, symbol: "£")
         coinDictionary[coinArray[3]] = Currency(name: coinArray[3].uppercased(), value: 0.0077, symbol: "¥")
-        coinDictionary[coinArray[4]] = Currency(name: coinArray[4].uppercased(), value: 20, symbol: "W")
+        coinDictionary[coinArray[4]] = Currency(name: coinArray[4].uppercased(), value: 5602.47, symbol: "₿")
     }
     //Initialization of the views into the array
     func initViews(){
