@@ -7,14 +7,11 @@
 //
 
 import UIKit
-
+//global vars so the hack.viewcontroller can see them
 var coinDictionary = [String: Currency]()
-var coinArray = ["Euro","Dollar","Pound", "Yen","BitCoin"] //Le paso el array de Strings también porque en la otra view no deja coger los strings del diccionario con coinDictionary.keys
+var coinArray = ["Euro","Dollar","Pound", "Yen","BitCoin"] 
 
 class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
-    // TODO DICCIONARIOS CLASES ARRAYS
-
-
 
     @IBOutlet weak var btnHack: UIButton!
     @IBOutlet weak var lbValue: UILabel!
@@ -43,21 +40,21 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         return coinArray[row]
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //para que detecte cuando se mueve el pickerview
+        calc()
     }
-    
+    //I have a counter of ViewDidLoad because when you go to the other view with the hack and come back it loads it again
     override func viewDidLoad() {
         position = 0
+        insertText.text = "0"
+        btnHack.isHidden = true
         pickerView.dataSource = self
         pickerView.delegate = self
-        super.viewDidLoad()
-        btnHack.isHidden = true
+        super.viewDidLoad()    
         if(viewDidLoadCounter == 0){
             initCoins()
             initViews()
         }
         changeView(view: viewArray[0])
-
         viewDidLoadCounter += 1
     }
     //Initialization of the coins into the dictionary
@@ -68,7 +65,7 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         coinDictionary[coinArray[3]] = Currency(name: coinArray[3].uppercased(), value: 0.0077, symbol: "¥")
         coinDictionary[coinArray[4]] = Currency(name: coinArray[4].uppercased(), value: 20, symbol: "W")
     }
-    
+    //Initialization of the views into the array
     func initViews(){
         viewArray.append(View(flag: UIImage(named: "europeFlag")!, back: UIImage(named: "bridge")!, coin: coinDictionary["Euro"]!))
         viewArray.append(View(flag: UIImage(named: "usaFlag")!, back: UIImage(named: "cars")!, coin: coinDictionary["Dollar"]!))
@@ -77,40 +74,43 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
        viewArray.append(View(flag: UIImage(named: "bitCoin")!, back: UIImage(named: "road")!, coin: coinDictionary["BitCoin"]!))
     }
     
-    //Calculating the value of the coin using the ratios in the Currency class, then rounding it
+    //Checks if the Insert Texts is not empty then calculates the value of the coin using the ratios in the Currency class, afterwards rounding it
     func calc(){
+        if(insertText != ""){
+        initConvertionLabels() //Writes the labels
+            
         let coin1 : Currency = coinDictionary[coinArray[pickerView.selectedRow(inComponent: 0)]]!
         let coin2 : Currency = coinDictionary[coinArray[pickerView.selectedRow(inComponent: 1)]]!
         var sol : Double = Double(insertText.text!)! * coin1.value / coin2.value
-        sol = sol*100
-        sol.round()
-        sol = sol/100
+        sol = sol*100 //Move two 0s to the left
+        sol.round() //round without decimals
+        sol = sol/100 //Move two 0s to the right
         
         lbTotalConversion.text = String(sol)
+        }
     }
     
     func initConvertionLabels(){
         
         lbConversion.text = "Conversion from \(coinArray[pickerView.selectedRow(inComponent: 0)]) to \(coinArray[pickerView.selectedRow(inComponent: 1)])"
     }
-
+    //When the button to exchange the coins is clicked, checks if the user has inputted the hack code
     @IBAction func convertClick(_ sender: Any) {
-        if(insertText.text != ""){
-            if(insertText.text == "999"){
-                btnHack.isHidden = false
-            }else{
-        initConvertionLabels()
-        calc()
-            }
+        if(insertText.text == "999"){
+            btnHack.isHidden = false
+        }else{
+            calc()
         }
     }
-    
+    //Changes the background,main images and value of the coin using the properties of a View object
+    //which is selected based on the var position and the viewArray
     func changeView(view : View){
         imageBackground.image = view.backGroundImage
         imageFlag.image = view.flagImage
         lbValue.text = String(view.coin.value)
     }
-    
+    //Changes the var position, and calls the changeView method to change the whole view
+    //if the position reaches the end of the array it starts over
     @IBAction func btnNext(_ sender: Any) {
         if (position < viewArray.count-1){
             position += 1
@@ -120,6 +120,8 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
             changeView(view: viewArray[position])
         }
     }
+    //Changes the var position, and calls the changeView method to change the whole view
+    //if the position reaches the end of the array it starts over
     @IBAction func btnBefore(_ sender: Any) {
         if (position > 0){
             position -= 1
@@ -129,6 +131,5 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
             changeView(view: viewArray[position])
         }
     }
-
 }
 
