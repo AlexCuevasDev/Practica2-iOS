@@ -13,10 +13,12 @@ import UIKit
 class View{
     var flagImage : UIImage
     var backGroundImage : UIImage
+    var coin : Currency
     
     
-    init(flag:UIImage, back:UIImage) {
+    init(flag: UIImage, back: UIImage, coin: Currency) {
         flagImage = flag
         backGroundImage = back
+        self.coin = coin
     }
 }

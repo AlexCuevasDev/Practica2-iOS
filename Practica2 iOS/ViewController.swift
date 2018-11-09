@@ -22,8 +22,12 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     @IBOutlet weak var insertText: UITextField!
     @IBOutlet weak var pickerView: UIPickerView!
     
-    var coinArray = ["Euro","Dollar","Pounds", "Yen","Tomate"]
+    var viewArray : [View] = []
+    var coinArray = ["Euro","Dollar","Pounds", "Yen","WoWToken"]
+    //Así con el WoW Token puedes mirar cuanto gastaste en tu vida universitaria ^^
     var coinDictionary = [String: Currency]()
+    var position : Int
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
@@ -41,15 +45,28 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         pickerView.delegate = self
         super.viewDidLoad()
         initCoins()
+        initViews()
+        imageBackground.image = viewArray[0].backGroundImage
+  /*      let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        imageHack.isUserInteractionEnabled = true */
     }
     //Initialization of the coins into the dictionary
     func initCoins(){
-        coinDictionary[coinArray[0]] = Currency(name: coinArray[0].uppercased(),value: 1,symbol: "E")
-        coinDictionary[coinArray[1]] = Currency(name: coinArray[1].uppercased(), value: 0.87, symbol: "D")
-        coinDictionary[coinArray[2]] = Currency(name: coinArray[2].uppercased(), value: 1.14, symbol: "P")
-        coinDictionary[coinArray[3]] = Currency(name: coinArray[3].uppercased(), value: 0.0077, symbol: "Y")
-        coinDictionary[coinArray[4]] = Currency(name: coinArray[4].uppercased(), value: 0.13, symbol: "Y")
+        coinDictionary[coinArray[0]] = Currency(name: coinArray[0].uppercased(),value: 1,symbol: "€")
+        coinDictionary[coinArray[1]] = Currency(name: coinArray[1].uppercased(), value: 0.87, symbol: "$")
+        coinDictionary[coinArray[2]] = Currency(name: coinArray[2].uppercased(), value: 1.14, symbol: "£")
+        coinDictionary[coinArray[3]] = Currency(name: coinArray[3].uppercased(), value: 0.0077, symbol: "¥")
+        coinDictionary[coinArray[4]] = Currency(name: coinArray[4].uppercased(), value: 20, symbol: "W")
     }
+    
+    func initViews(){
+        viewArray.append(View(flag: UIImage(named: "europeFlag")!, back: UIImage(named: "bridge")!, coin: coinDictionary["Euro"]!))
+        viewArray.append(View(flag: UIImage(named: "usaFlag")!, back: UIImage(named: "cars")!, coin: coinDictionary["Dollar"]!))
+        viewArray.append(View(flag: UIImage(named: "ukFlag")!, back: UIImage(named: "metro")!, coin: coinDictionary["Pound"]!))
+        viewArray.append(View(flag: UIImage(named: "japanFlag")!, back: UIImage(named: "citySkyBlack")!, coin: coinDictionary["Yen"]!))
+        viewArray.append(View(flag: UIImage(named: "wowLogo")!, back: UIImage(named: "road")!, coin: coinDictionary["WoWToken"]!))
+    }
+    
     //Calculating the value of the coin using the ratios in the Currency class, then rounding it
     func calc(){
         let coin1 : Currency = coinDictionary[coinArray[pickerView.selectedRow(inComponent: 0)]]!
@@ -62,14 +79,29 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         lbTotalConversion.text = String(sol)
     }
     
-    func initLabels(){
+    func initConvertionLabels(){
         
         lbConversion.text = "Conversion from \(coinArray[pickerView.selectedRow(inComponent: 0)]) to \(coinArray[pickerView.selectedRow(inComponent: 1)])"
     }
 
     @IBAction func convertClick(_ sender: Any) {
-        initLabels()
+        if(insertText.text != ""){
+            if(insertText.text == "999"){
+                
+            }
+        initConvertionLabels()
         calc()
+        }
     }
+    @IBAction func btnNext(_ sender: Any) {
+        
+    }
+    @IBAction func btnBefore(_ sender: Any) {
+    }
+    
+  /*  @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer){
+       let tappedImage = tapGestureRecognizer.view as! UIImageView
+        
+    } */
 }
 
