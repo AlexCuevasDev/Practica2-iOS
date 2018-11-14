@@ -141,5 +141,19 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         convertClick(btnConvert)
     }
     
+    private func saveCoins(){
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(coinDictionary.values, toFile: Currency.ArchiveURL.path)
+        if isSuccessfulSave {
+            print("Coins successfully saved.")
+        } else {
+            print("Failed to save coins...")
+        }
+    }
+    
+    private func loadCoins() -> [Currency]?{
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Currency.ArchiveURL.path) as? [Currency]
+    }
+    
+    
 }
 
