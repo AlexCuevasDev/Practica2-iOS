@@ -14,12 +14,10 @@ class Currency: CustomStringConvertible{
     var name : String
     var value : Double
     var symbol : Character
-    var originalValue : Double
     
     init (name : String, value : Double, symbol : Character){
         self.name = name
         self.value = value
         self.symbol = symbol
-        originalValue = value
     }
 }

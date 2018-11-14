@@ -141,9 +141,5 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         convertClick(btnConvert)
     }
     
-  
-    
-    
-    
 }
 
